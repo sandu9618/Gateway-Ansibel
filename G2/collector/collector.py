@@ -9,7 +9,7 @@ def collecting_traffic(name):
     print(str(name)+ ' Thread starts')
     shell = Shell()
     shell.execute("echo \"abcd\" | sudo -S stop my")
-    shell.execute("echo \"abcd\" | sudo -S tcpdump -i any -v -G 20 not arp and not src 10.2.0.19 and not src 127.0.0.1 and not dst 10.2.0.19 and not dst 127.0.0.1 -w data-%S.pcap")
+    shell.execute("echo \"abcd\" | sudo -S tcpdump -i any -v -G 20 not arp and not src 10.2.0.190 and not src 127.0.0.1 and not dst 10.2.0.190 and not dst 127.0.0.1 -w data-%S.pcap")
 
 def __main():
 

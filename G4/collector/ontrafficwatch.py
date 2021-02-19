@@ -50,11 +50,17 @@ class Handler(FileSystemEventHandler):
                 file = self.queue.get()
                 csv_file_name = socket.gethostname()+'traffic'+file[5:-5]+'.csv'
 
-                self.shell.execute("echo \"abcd\" |  sudo -S tshark -r " + file + " -T fields -E separator=, -E quote=d -e _ws.col.No. -e _ws.col.Time -e _ws.col.Source -e tcp.srcport -e _ws.col.Destination -e tcp.dstport -e _ws.col.Protocol -e _ws.col.Length -e _ws.col.Info > " + csv_file_name)
+                self.shell.execute("echo \"abcd\" |  sudo -S tshark -r " + file + "-T fields -E separator=, -E "
+                                                                                  "quote=d -e _ws.col.No. -e "
+                                                                                  "_ws.col.Time -e _ws.col.Source -e "
+                                                                                  "tcp.srcport -e _ws.col.Destination "
+                                                                                  "-e tcp.dstport -e _ws.col.Protocol "
+                                                                                  "-e _ws.col.Length -e _ws.col.Info "
+                                                                                  "> " + csv_file_name)
 
                 try:
                     var_password  = "abcd"
-                    var_command = "scp -o StrictHostKeychecking=no " + csv_file_name + " root@10.4.0.4:/root/GateWay/Profiles"
+                    var_command = "scp -o StrictHostKeychecking=no " + csv_file_name + " root@10.4.0.126:/root/GateWay/Profiles"
         
                     var_child = pexpect.spawn(var_command)
                     i = var_child.expect(["password:", pexpect.EOF])

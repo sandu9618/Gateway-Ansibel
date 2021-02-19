@@ -54,7 +54,7 @@ class Handler(FileSystemEventHandler):
 
                 try:
                     var_password  = "abcd"
-                    var_command = "scp -o StrictHostKeychecking=no " + csv_file_name + " root@10.1.0.149:/root/GateWay/Profiles"
+                    var_command = "scp -o StrictHostKeychecking=no " + csv_file_name + " root@10.1.0.65:/root/GateWay/Profiles"
         
                     var_child = pexpect.spawn(var_command)
                     i = var_child.expect(["password:", pexpect.EOF])
