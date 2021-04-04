@@ -3,7 +3,7 @@ import threading
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from ontrafficwatch import OnTrafficWatch
-import subprocess
+import time
 
 
 def collecting_traffic(name):
@@ -13,11 +13,13 @@ def collecting_traffic(name):
     shell.execute("echo \"abcd\" | sudo -S tcpdump -i any -v -G 20 not arp and not src 10.1.0.65 and not src "
                   "127.0.0.1 and not dst 10.1.0.65 and not dst 127.0.0.1 -w data-%S.pcap")
 
+
 def allowed_traffic_generate(name):
     print(str(name) + ' Thread starts')
     shell = Shell()
     while True:
-        shell.execute("echo \"abcd\" | sudo -S curl http://10.5.0.164:80")
+        shell.execute("echo \"abcd\" | sudo -S curl http://172.24.4.159:8080")
+        time.sleep(1)
 
         # TODO : FTP & Ping , Update other gateways
 
